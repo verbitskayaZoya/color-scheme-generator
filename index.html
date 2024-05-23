@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="index.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title> Color palette </title>
+    </head>
+    <body>
+        <div class="container">
+            <h1> Color palette </h1>
+
+<!-- ? I've chosen a fieldset tag for those inputs but  
+? I was thinking of a section as well, what do you think is the best in terms of accessibility? 
+? Perhaps, there is something else?  -->
+
+            <fieldset class="inputs-container">
+                <legend> Choose a color, a scheme and a number to get a color palette </legend>
+                <div class="inputs-clr-range">
+                    <input
+                        type="color"
+                        id="input-selectedClr"
+                        name="selectedClr"
+                        value="#5784CB"
+                        class="input-clr"
+                    /> 
+                    <label for="input-selectedClr" class="hidden-label"> Choose your color </label>
+                    <div class="input-range-container">
+                        <input type="range" id="input-clrs-range" class="input-range" min="3" max="7"> 
+                        <label for="input-clrs-range" class="hidden-label">Choose from 3 to 7 numbers </label> 
+                        <output> 5 colors </output>
+                    </div>    
+                </div>
+                <div class="drop-down-custom-container" id="drop-down-custom-container">
+                    <div class="select-mode">
+                        <button class="clr-scheme" id="color-scheme"> Monochrome </button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m14.5 8.5l-4 4l-4-4"/></svg>
+                    </div>
+                    <ul class="drop-down-custom-options-container hidden-display" id="options-container" >
+                        <!-- Options are rendered dynamically in js -->
+                    </ul>
+                </div>      
+            </fieldset>
+            <button id="btn" class="cta"> Get color scheme </button>
+            <main id="clrs-container" class="clrs-container"></main>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
