@@ -1,15 +1,30 @@
+
+// ----------TO LOAD FIRST TIME ONLY--------------
+(async () => {
+  fetch(
+        `https://www.thecolorapi.com/scheme?hex=5784CB&mode=monochrome&count=5`
+    ).then (res => res.json())
+    .then(dataFromApi => {
+        return generateHTML(dataFromApi)
+    })
+    .then((HTML => {
+        document.getElementById('clrs-container').innerHTML = HTML
+    }))
+    })()
+
 // -------GETTING ELEMENTS FROM DOM---------------
 const dropDownCustom = document.getElementById("drop-down-custom-container")
 const optionsContainer = document.getElementById("options-container")
 const btnCustomScheme = document.getElementById('btn-scheme')
+const btnGetClrs = document.getElementById('btn-generate-clrs')
 const colorsContainer = document.getElementById('clrs-container')
-const copiedToClipBoardText = document.getElementById("copied")
 // ! I really wanna get rid of these dom elements but there is a problem with api and function calls because of the (e/event)
 const pickedClr = document.getElementById('input-pickedClr')
 const numberOfClrs = document.getElementById("input-clrs-range")
 
 // ----------GLOBAL VARIABLES--------------------
 let scheme = "monochrome"
+
 
 //-------EVENT LISTENERS--------------------------
 // to change the numbers of colors in input range according the the user's input
@@ -23,22 +38,10 @@ let scheme = "monochrome"
 pickedClr.addEventListener('input', () => pickedClr.value)
 numberOfClrs.addEventListener("input", displayNumbers)
 
-// to close the custom select input when clicked outside of it
+
 // ? I was trying to use a different element but I couldn't manage to make it work 
 // ? unless I used document, is it okay? I have a feeling it's not a good solution to have 
 // ? eventListener on a document
-// document.addEventListener("click", (e) => {
-//     const dropdownCustomDimensions =dropDownCustom.getBoundingClientRect()  
-//     if(
-//         e.clientX < dropdownCustomDimensions.left || 
-//         e.clientX > dropdownCustomDimensions.right || 
-//         e.clientY < dropdownCustomDimensions.top || 
-//         e.clientY > dropdownCustomDimensions.bottom
-//     ) {
-//       document.querySelector(".drop-down-custom-container > ul").classList.add("hidden-display")
-//     }
-//   })
-
 document.addEventListener("click", (e) => closeCustomSelectWhenClickedOutside(e))
   
 dropDownCustom.addEventListener("click", (e) => {
@@ -48,12 +51,14 @@ dropDownCustom.addEventListener("click", (e) => {
     changeSchemeValueWhenClicked(e)
 })
 
-document.getElementById('btn-generate-clrs').addEventListener('click', async () => {
+btnGetClrs.addEventListener('click', async () => {
     colorsContainer.innerHTML = `${await generateHTML(getColorsFromApi()) }`
 })
 
 colorsContainer.addEventListener("click" , (e) => {
-    copyHexToClipboard(e)
+    if(e.target.className === "img") {
+        copyHexToClipboard(e)
+    }
 })
 
 // -----------FUNCTION DECLARATIONS---------------------------
@@ -120,8 +125,8 @@ async function generateHTML(arrFromApi) {
         const result = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255
         HTML += 
             `<div class="clr-card">
-            <img class="img" src=${clr.image.bare} /> 
-            <p class="img-name" style="color:${result > 0.5 ? "black" : "white"}"}> ${clr.hex.value} </p> 
+                <img class="img" src=${clr.image.bare} alt="Color of the following hex value ${clr.hex.value}" /> 
+                <p class="img-name" style="color:${result > 0.5 ? "black" : "white"}"}> ${clr.hex.value} </p> 
             </div> `
     })
     return HTML
@@ -131,7 +136,7 @@ async function generateHTML(arrFromApi) {
 function copyHexToClipboard(el) {
     const hexValue = el.target.nextElementSibling.innerHTML
     navigator.clipboard.writeText(`${hexValue}`)
-    copiedToClipBoardText.innerHTML = `copied ${hexValue}`
-    copiedToClipBoardText.style.display = 'block'
-    setTimeout(() => copiedToClipBoardText.style.display = 'none', 3000)
+    btnGetClrs.innerHTML =  `copied ${hexValue}`
+    setTimeout(() => btnGetClrs.innerHTML = 'Get color scheme', 3000)
 }
+
