@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Lugrasimo&family=Sevillana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;&display=swap');
+
+:root {
+  --bg-color: #1F2937;
+  --txt-color: #D5D4D8;
+  --btn-bg-color: #3D4B60;
+  --btn-color: #fff;
+  --bg-accent-color: #D2D4C8;
+  --bg-color-test: #4C86A8;
+
+  --primary-font: Roboto;
+  --accent-font:  Lugrasimo;
+
+}
+
+body {
+  box-sizing: border-box;
+  font-family: var(--primary-font), sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  color: var(--txt-color);
+}
+
+h1 {
+    font-family: var(--accent-font);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs-container legend {
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    background: var(--bg-color-test);
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+}
+
+.inputs-container {
+    display: grid;
+    width: 70%;
+    gap: 1.5rem;
+    max-width: 1200px;
+    background: var(--bg-accent-color);
+    border-radius: 1rem;
+    border: 0.3rem solid var(--bg-color-test);
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+
+ .input-clr-container, .input-range-container {
+    display: flex;
+    flex-direction: column;
+} 
+
+.input-clr, .input-range, .cta-btn, .select-custom-container {
+    height: 2.5rem;
+    min-width: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.select-custom-container, .cta-btn, .input-range, .input-clr {
+    margin: 0 auto;
+    max-width: 55%;
+} 
+.cta-btn {
+    height: 3rem;
+    border: none;
+    border-radius: 0.75rem;
+    background-color: var(--btn-bg-color);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    color: var(--btn-color);
+    font-size: 1.1rem;
+}
+
+/* custom input select  */
+.select-custom-container {
+    /* border: 2px blue solid; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+} 
+
+.select-custom-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+    width: 100%;
+    padding: 1.3rem 0;
+}
+
+.select-custom-btn {
+    background-color: inherit;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    cursor: inherit;
+}
+
+.select-custom-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    position: absolute;
+    top: 64%;
+    left: 0;
+    width: 100%;
+
+    box-sizing: border-box;
+    background: var(--bg-color);
+    /*! Is there a better way of making it work on top of other elements? */
+    z-index: 1; 
+}
+  
+.option {
+    list-style: none;
+    padding: 0.5rem 0;
+    transition: width 0.2s;
+    margin-left: -2rem;
+}
+  
+.option:hover {
+    cursor: pointer;
+    width: 98%;
+    background: var(--btn-bg-color);
+}
+
+
+/* input range styling  */
+.input-range-container {
+    position: relative;
+    margin-bottom: 1rem;
+    /* border: 2px blue solid; */
+}
+
+  
+.input-range {
+    background: var(--btn-bg-color);
+    border: 0.1rem solid var(--txt-color);
+    -webkit-appearance: none;
+    border-radius: 5rem;
+    margin-top: 0.2rem;
+}
+
+output {
+    position: absolute;
+    left: 45%;
+    top: 70%;
+    color: var(--bg-color);
+    font-size: 1.3rem;
+}
+  
+.input-range::-webkit-slider-thumb {
+  background: var(--btn-color);
+  -webkit-appearance: none;
+  border-radius: 2.5rem;
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.hidden-label {
+    opacity: 1;
+} 
+
+.hidden-display {
+    display: none;
+}
+
+.selected {
+    background: var(--btn-bg-color);
+}
+
+/* clrs container */
+.clrs-container {
+    position: relative;
+    width: 85%;
+    max-width: 1300px;
+}
+   
+.clr-card {
+    display: flex;
+}
+
+.img {
+    width: 100%;
+    height: 10vh;
+    cursor: copy;
+}
+    
+.img-name {
+    position: absolute;
+    padding: 1rem;
+    align-self: center;
+}
+
+
+@media screen and (min-width: 1200px) {
+ .inputs-container {
+    grid-template-columns: repeat(4, 1fr);
+    align-content: center;
+}
+
+.input-clr, .input-range, .cta-btn, .select-custom-container {
+    min-width: 90%;
+}
+
+.clrs-container {
+    display: flex;
+    width: 100%;
+    height: 70vh;
+}
+
+.clr-card, .img  {
+    height: inherit;
+}
+
+.img-name {
+    position: absolute;
+    bottom: 1rem;
+}
+
+}
